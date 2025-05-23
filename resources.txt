@@ -1,0 +1,4 @@
+# resources.txt
+1,Iron Ore,1.5
+2,Wood,0.8
+3,Water,1.0
