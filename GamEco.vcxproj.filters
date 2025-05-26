@@ -24,6 +24,9 @@
     <ClCompile Include="Resources\ResourceType.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\EconomicAgent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\ResourceType.h">
@@ -32,9 +35,21 @@
     <ClInclude Include="Resources\ResourceRegistry.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\IEconomicAgent.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\EconomicAgent.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\IGlobalEconomyManager.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="MobileAgents.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

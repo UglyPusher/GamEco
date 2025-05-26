@@ -136,16 +136,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entities\EconomicAgent.cpp" />
     <ClCompile Include="GamEco.cpp" />
     <ClCompile Include="Resources\ResourceRegistry.cpp" />
     <ClCompile Include="Resources\ResourceType.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entities\EconomicAgent.h" />
+    <ClInclude Include="Entities\IEconomicAgent.h" />
+    <ClInclude Include="Entities\IGlobalEconomyManager.h" />
     <ClInclude Include="Resources\ResourceRegistry.h" />
     <ClInclude Include="Resources\ResourceType.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="resources.txt" />
+    <Text Include="MobileAgents.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
