@@ -136,12 +136,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\BaseIdentifiable.cpp" />
+    <ClCompile Include="Core\BaseStepable.cpp" />
+    <ClCompile Include="Core\StepableGroup.cpp" />
     <ClCompile Include="Entities\EconomicAgent.cpp" />
     <ClCompile Include="GamEco.cpp" />
     <ClCompile Include="Resources\ResourceRegistry.cpp" />
     <ClCompile Include="Resources\ResourceType.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\BaseIdentifiable.h" />
+    <ClInclude Include="Core\BaseStepable.h" />
+    <ClInclude Include="Core\IIdentifiable.h" />
+    <ClInclude Include="Core\IStepable.h" />
+    <ClInclude Include="Core\StepableGroup.h" />
     <ClInclude Include="Entities\EconomicAgent.h" />
     <ClInclude Include="Entities\IEconomicAgent.h" />
     <ClInclude Include="Entities\IGlobalEconomyManager.h" />

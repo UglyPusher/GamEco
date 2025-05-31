@@ -1,4 +1,4 @@
-#include "ResourceRegistry.h"
+ #include "ResourceRegistry.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
