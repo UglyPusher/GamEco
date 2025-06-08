@@ -1,6 +1,25 @@
 #include "BaseEconomicAgent.h"
+#include "../World/GroupEconomicObject.h"  // предполагаетс€
 
 #include <algorithm>
+#include <stdexcept>
+
+void BaseEconomicAgent::registerTo(GroupEconomicObject* group) {
+    if (!group) {
+        throw std::invalid_argument("[BaseEconomicAgent] Cannot register to null group.");
+    }
+
+    if (registry_) {
+        registry_->removeStepable(this->getId());
+    }
+
+    registry_ = group;
+    registry_->addStepable(shared_from_this());
+}
+
+GroupEconomicObject* BaseEconomicAgent::getRegistry() const {
+    return registry_;
+}
 
 const std::unordered_map<const ResourceType*, uint64_t>& BaseEconomicAgent::getResources() const {
     return resources_;
@@ -25,7 +44,6 @@ uint64_t BaseEconomicAgent::consumeResource(const ResourceType& type, uint64_t a
 
 void BaseEconomicAgent::setTotalCapacity(uint64_t maxVolume) {
     capacityLimit_ = maxVolume;
-    // ѕринудительное урезание ресурсов, если превышают
     uint64_t total = 0;
     for (auto& pair : resources_) {
         uint64_t vol = pair.first->getVolume();

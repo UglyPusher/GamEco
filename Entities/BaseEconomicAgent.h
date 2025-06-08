@@ -5,11 +5,19 @@
 
 #include <unordered_map>
 
-/// [AI: PURPOSE] Базовый экономический агент с ограниченным по объёму хранилищем ресурсов.
-/// [AI: DESIGN] Использует BaseStepable для механики симуляции и добавляет бизнес-логику: ресурсы, объём, производство.
+class GroupEconomicObject; // forward declaration
+
+/// [AI: PURPOSE] Базовый класс для всех экономических объектов.
+/// [AI: DESIGN] Объекты имеют ресурсы, участвуют в симуляции, могут быть зарегистрированы в группах.
 class BaseEconomicAgent : public BaseStepable {
 public:
     virtual ~BaseEconomicAgent() = default;
+
+    /// [AI: PURPOSE] Зарегистрировать агента в указанной группе.
+    virtual void registerTo(GroupEconomicObject* group);
+
+    /// [AI: PURPOSE] Получить указатель на текущую группу регистрации.
+    GroupEconomicObject* getRegistry() const;
 
     /// [AI: PURPOSE] Получить текущее количество ресурсов.
     const std::unordered_map<const ResourceType*, uint64_t>& getResources() const;
@@ -35,4 +43,7 @@ protected:
 
     std::unordered_map<const ResourceType*, uint64_t> resources_;
     uint64_t capacityLimit_ = 0;
+
+    /// [AI: STATE_FIELD] Ссылка на группу, в которой зарегистрирован агент.
+    GroupEconomicObject* registry_ = nullptr;
 };
