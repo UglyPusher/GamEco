@@ -138,8 +138,7 @@
   <ItemGroup>
     <ClCompile Include="Core\BaseIdentifiable.cpp" />
     <ClCompile Include="Core\BaseStepable.cpp" />
-    <ClCompile Include="Core\StepableGroup.cpp" />
-    <ClCompile Include="Entities\EconomicAgent.cpp" />
+    <ClCompile Include="Entities\BaseEconomicAgent.cpp" />
     <ClCompile Include="GamEco.cpp" />
     <ClCompile Include="Resources\ResourceRegistry.cpp" />
     <ClCompile Include="Resources\ResourceType.cpp" />
@@ -150,8 +149,7 @@
     <ClInclude Include="Core\IIdentifiable.h" />
     <ClInclude Include="Core\IStepable.h" />
     <ClInclude Include="Core\StepableGroup.h" />
-    <ClInclude Include="Entities\EconomicAgent.h" />
-    <ClInclude Include="Entities\IEconomicAgent.h" />
+    <ClInclude Include="Entities\BaseEconomicAgent.h" />
     <ClInclude Include="Entities\IGlobalEconomyManager.h" />
     <ClInclude Include="Resources\ResourceRegistry.h" />
     <ClInclude Include="Resources\ResourceType.h" />
@@ -159,6 +157,10 @@
   <ItemGroup>
     <Text Include="resources.txt" />
     <Text Include="MobileAgents.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ai_standart.md" />
+    <None Include="prompt.ai" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

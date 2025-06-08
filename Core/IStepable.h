@@ -1,17 +1,17 @@
 #pragma once
 
-#include "IIdentifiable.h"
+#include <cstdint>
+#include <memory>
 
-/**
- * »нтерфейс объекта, участвующего в пошаговой симул€ции.
- * ¬се объекты IStepable также €вл€ютс€ идентифицируемыми.
- */
-class IStepable : public IIdentifiable {
+/// [AI: PURPOSE] »нтерфейс дл€ объектов, выполн€ющих шаг симул€ции.
+/// [AI: USAGE] »спользуетс€ в системах пошагового обновлени€. Ќе содержит требований к идентификации.
+class IStepable {
 public:
+    using Ptr = std::shared_ptr<IStepable>;
+
     virtual ~IStepable() = default;
 
-    /**
-     * ћетод, вызываемый на каждом шаге симул€ции.
-     */
-    virtual void step() = 0;
+    /// [AI: PURPOSE] ¬ыполнить симул€ционный шаг дл€ текущего времени.
+    /// [AI: USAGE] ¬ызываетс€ один раз за шаг симул€ции извне.
+    virtual void step(uint64_t currentStep) = 0;
 };

@@ -2,20 +2,32 @@
 
 #include "ResourceType.h"
 #include <unordered_map>
-#include <memory>
 #include <string>
+#include <vector>
 
+/// [AI: PURPOSE] Глобальный реестр всех типов ресурсов.
+/// [AI: DESIGN] Используется как static-only API без необходимости создавать экземпляры.
 class ResourceRegistry {
 public:
-    // Добавляет новый тип ресурса, возвращает его ID
-    int addResource(const std::string& name, int volumePerUnit);
+    /// [AI: PURPOSE] Зарегистрировать новый ресурс. Возвращает его уникальный ID.
+    static IIdentifiable::IdType addResource(const std::string& name, uint64_t volumePerUnit);
 
-    // Получает ресурс по ID, nullptr если не найден
-    const ResourceType* getResourceById(int id) const;
+    /// [AI: PURPOSE] Получить ресурс по ID.
+    static const ResourceType* getResourceById(IIdentifiable::IdType id);
 
-    // Загружает ресурсы из текстового конфигурационного файла
-    bool loadFromFile(const std::string& filename);
+    /// [AI: PURPOSE] Получить ресурс по имени (если существует).
+    static const ResourceType* getResourceByName(const std::string& name);
+
+    /// [AI: PURPOSE] Получить список всех ресурсов.
+    static std::vector<const ResourceType*> getAllResources();
+
+    /// [AI: PURPOSE] Загрузить ресурсы из конфигурационного файла.
+    static bool loadFromFile(const std::string& filename);
 
 private:
-    std::unordered_map<int, ResourceType> resourceMap_;
+    static std::unordered_map<IIdentifiable::IdType, ResourceType> resourceMap_;
+    static std::unordered_map<std::string, IIdentifiable::IdType> nameToIdMap_;
+
+    /// [AI: DESIGN] Запрещаем создание экземпляров.
+    ResourceRegistry() = delete;
 };

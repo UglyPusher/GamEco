@@ -24,16 +24,13 @@
     <ClCompile Include="Resources\ResourceType.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\EconomicAgent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Core\BaseStepable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Core\BaseIdentifiable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Core\StepableGroup.cpp">
+    <ClCompile Include="Entities\BaseEconomicAgent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,9 +39,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Resources\ResourceRegistry.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\IEconomicAgent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Core\BaseStepable.h">
@@ -62,10 +56,10 @@
     <ClInclude Include="Core\StepableGroup.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\EconomicAgent.h">
+    <ClInclude Include="Entities\IGlobalEconomyManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\IGlobalEconomyManager.h">
+    <ClInclude Include="Entities\BaseEconomicAgent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,5 +70,9 @@
     <Text Include="MobileAgents.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ai_standart.md" />
+    <None Include="prompt.ai" />
   </ItemGroup>
 </Project>

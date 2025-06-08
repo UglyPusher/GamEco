@@ -4,34 +4,41 @@
 #include <atomic>
 #include <cstdint>
 
+/// [AI: PURPOSE] Базовая реализация IIdentifiable с автоинкрементом идентификатора.
+/// [AI: DESIGN] Использует std::atomic для потокобезопасного назначения ID (даже если симуляция однопоточная).
 class BaseIdentifiable : public IIdentifiable {
 public:
+    /// [AI: USAGE] Назначает новый уникальный ID при создании.
     BaseIdentifiable() : id(nextId()) {}
-    explicit BaseIdentifiable(int64_t existingId) : id(existingId) {
+
+    /// [AI: USAGE] Используется при восстановлении объекта с уже существующим ID.
+    explicit BaseIdentifiable(IdType existingId) : id(existingId) {
         updateCounter(existingId);
     }
 
-    int64_t getId() const override {
+    /// [AI: PURPOSE] Возвращает уникальный ID объекта.
+    IdType getId() const override {
         return id;
     }
 
 protected:
-    int64_t id;
+    /// [AI: STATE_FIELD] Идентификатор объекта.
+    IdType id;
 
 private:
-    static std::atomic<int64_t> counter;
+    /// [AI: STATE_FIELD] Глобальный счётчик ID.
+    static std::atomic<IdType> counter;
 
-    static int64_t nextId() {
+    /// [AI: DESIGN] Выдаёт новый ID, увеличивая счётчик.
+    static IdType nextId() {
         return ++counter;
     }
 
-    static void updateCounter(int64_t val) {
-        int64_t cur = counter.load();
+    /// [AI: DESIGN] Обновляет счётчик, если ID выше текущего значения (для восстановления из данных).
+    static void updateCounter(IdType val) {
+        IdType cur = counter.load();
         while (val > cur && !counter.compare_exchange_weak(cur, val)) {
             // loop until updated
         }
     }
 };
-
-// Инициализация статического члена
-//std::atomic<int64_t> BaseIdentifiable::counter{ 0 };

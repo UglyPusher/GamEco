@@ -1,20 +1,13 @@
 #include "ResourceType.h"
 
-// Инициализация статического счетчика
-int ResourceType::nextId_ = 0;
-
-ResourceType::ResourceType(const std::string& name, int volume)
-    : id_(nextId_++), name_(name), volume_(volume) {}
-
-int ResourceType::getId() const {
-    return id_;
-}
+ResourceType::ResourceType(const std::string& name, uint64_t volume)
+    : name_(name), volume_(volume) {}
 
 const std::string& ResourceType::getName() const {
     return name_;
 }
 
-int ResourceType::getVolume() const {
+uint64_t ResourceType::getVolume() const {
     return volume_;
 }
 
@@ -22,10 +15,10 @@ bool ResourceType::isCraftable() const {
     return !componentResourceQuantities_.empty();
 }
 
-const std::unordered_map<int, int>& ResourceType::getRecipe() const {
+const std::unordered_map<IIdentifiable::IdType, uint64_t>& ResourceType::getRecipe() const {
     return componentResourceQuantities_;
 }
 
-void ResourceType::setRecipe(const std::unordered_map<int, int>& recipe) {
+void ResourceType::setRecipe(const std::unordered_map<IIdentifiable::IdType, uint64_t>& recipe) {
     componentResourceQuantities_ = recipe;
 }

@@ -1,30 +1,40 @@
 #include "BaseStepable.h"
-#include "IIdentifiable.h"
 
 std::mt19937 BaseStepable::rng;
 
+/// [AI: RNG_INIT_IMPL] Установка глобального seed.
 void BaseStepable::initializeRng(unsigned seed) {
     rng.seed(seed);
 }
 
-void BaseStepable::addStepable(const std::shared_ptr<IStepable>& obj) {
-    stepables.push_back(obj);
-}
-
-void BaseStepable::removeStepable(int64_t id) {
-    stepables.erase(
-        std::remove_if(stepables.begin(), stepables.end(),
-            [id](const std::shared_ptr<IStepable>& obj) {
-                auto identifiable = std::dynamic_pointer_cast<IIdentifiable>(obj);
-                return identifiable && identifiable->getId() == id;
-            }),
-        stepables.end()
-    );
-}
-
-void BaseStepable::step() {
-    std::shuffle(stepables.begin(), stepables.end(), rng);
-    for (auto& obj : stepables) {
-        obj->step();
+/// [AI: AGGREGATION_IMPL] Добавление stepable-объекта по ID.
+void BaseStepable::addStepable(const std::shared_ptr<IStepable>& obj, IdType id) {
+    if (obj) {
+        stepables[id] = obj;
     }
+}
+
+/// [AI: AGGREGATION_IMPL] Удаление объекта по ID.
+void BaseStepable::removeStepable(IdType id) {
+    stepables.erase(id);
+}
+
+/// [AI: STEP_IMPL] Выполнение шага: один раз за текущий шаг, + потомки.
+void BaseStepable::step(uint64_t currentStep) {
+    if (currentStep <= lastProcessedStep) return;
+
+    lastProcessedStep = currentStep;
+
+    std::vector<std::shared_ptr<IStepable>> shuffled;
+    for (const auto& kv : stepables) {
+        if (kv.second) shuffled.push_back(kv.second);
+    }
+
+    std::shuffle(shuffled.begin(), shuffled.end(), rng);
+
+    for (const auto& s : shuffled) {
+        s->step(currentStep);
+    }
+
+    performStep(currentStep);
 }
